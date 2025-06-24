@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "agent-realty-lead-system",
+  "private_key_id": "95a5e3b3657a6048c59f60f07a9c3733a3bed77c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDKbLW7zzN9V6Nt\neVUIjhtCc0ivAGiTODHJKwXsimkBTjNxOyicq34si0BjNkjB8HyP3f6lrEBRtGqO\neWRiFSX6mSCb0jb8BC2lAjxc1w8Q0Ca4/+qTa8UFt0ZCyqWLzbt3/vaNwWXen8h0\nPpYOlixPcYqK6BiRzwIN3OPkLrlwkj1AGHGcyh7gZSG0xNxgOcZ7fZ+/bjdB8m76\nha7LASIt0jLLoD3v+jGPbq2BJIoYOxdO/ukDLIaE1iTZgp+tsNEuyLjwhIMayrl8\nhaDqCq9MGnmVvYKzdz/zF0f/i0ZvXw8GdrwOb0Mx3kSiyxUPBb1uStuuKxwSZUWO\nhcy+XtpfAgMBAAECggEAXCn46KTjbatMVpjKtZV2JeA1dLB77KPGTzCOhu9R9e00\nENb9m6+dSAyy6TkbEWo8XIiX27i8pDa/2VS99sZoP1we87NXo5EHczy8XQzx6BbN\nuqeSl0KXNw4GKHz5uNiYBX+JpGssxZr8eqjQS53mWNl6Wdpo7WJSLhuniwoXFoA/\npNd4oWMibameZAYzA3VDtM4MA6ANw0JHHbdblZ/XvN9rTdtrCtxlH7krtqs6abdC\nAW3ll3kz3thz8U/sLDIHjDuYsgZ99jqO0kYzsCANKk/2i9WqO9UrfnkeZRup5JtV\ny/mblw4spC6KHyGKaxgsnhh6vSHq/53g+818y8h+CQKBgQDlCZKE9aHh5A+YqjCi\nFGAH5XDhSIpGZG6qUDr8V8+RJVWQyNX4Q8BQu4BxBZWNXoP852t434hoYrrMRcWy\n1wbPdxYXwq+3dyHXQp3cwPpbxCjLtC5O2PH4a4Q0Zcf7rRBh9PM2jYynIlRe36Ur\ntekPi1gcryuBNPhEUdxetxg1ewKBgQDiQR4giJ3avrd1uUADIkOR1eQa5JGMv/eN\nYTeYx9e4Xz16glMuxaJrBf9QZZHyRrhZe5wPZR7iuHu8s0+uByT38YNQoWk1z7xv\nh6spb+fqOYKjN/pFx7yl3OZU+2vgcxvxVyYqGgdxh5jOTO+Oc+Z8XTHmeR7IAUnk\nk3SRLzOvbQKBgA+vQCFq0NMvUwIZZYsz6f+gbsJ+vTlk109Cf0eYm9ZMwDdSCZUe\nzqS4smsK/trXhiJjlrCIXkcHu9MRVCCTKRw8A39NDct6lQ6wuS7M6FgwbrrEdAdi\nQ+/HLR6JedB6YYzTwXQS7XbkmvKETkNYCcXOvRH5zPjkL7w9/uFdmILRAoGBALaf\nvxSdkWT2Whkw7UVaS9YUIqm+YumMLeI1XW35qNsOLQ6M0V3IcsAWOC4JvhMkGDtK\nNf6LLbHtHRuEVMVwyNtFWywjDUw9IKmZhYPN6xE5WIQsc9wNS+1Jb7Wat0mVQDG+\nmXSUS/vMan/iw95lGN67TsLscvcXazCQASALTJnFAoGAQOoZSmcB4TYyEeliYKMM\nykqcXYBC1c2l+Z2yOt1IO7J4/VLSl6syft6IWCukdHK7/oKFOQDboXMERTVLFcDT\nEEzHJNTKHS6dZycwjD8hoybMHHoiya0VYCN+HkPqRsbr0hKTmfXkPTHhIigwU1gE\nNBFLt3RIXW6Qhhmn1RT57GY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "agent-realty-service-bot@agent-realty-lead-system.iam.gserviceaccount.com",
+  "client_id": "110211474756440950225",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/agent-realty-service-bot%40agent-realty-lead-system.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
