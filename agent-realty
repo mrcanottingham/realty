@@ -1,0 +1,50 @@
+import streamlit as st
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+
+# Set up Google Sheets API scope
+scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+
+# Load Google credentials securely from Streamlit secrets
+json_key = st.secrets["google_service_account"]
+creds = ServiceAccountCredentials.from_json_keyfile_dict(json_key, scope)
+
+# Connect to Google Sheets
+client = gspread.authorize(creds)
+sheet = client.open("Agent Realty Lead Sheet").sheet1
+
+# Streamlit app
+st.title("🏠 Agent Realty | Distressed Property Lead Intake")
+st.subheader("Submit a new lead for evaluation")
+
+# Input fields
+with st.form("lead_form", clear_on_submit=True):
+    name = st.text_input("Seller Name")
+    phone = st.text_input("Phone Number")
+    email = st.text_input("Email Address")
+    property_address = st.text_input("Property Address")
+    property_type = st.selectbox("Property Type", ["Single Family", "Multi-Family", "Land", "Other"])
+    bedrooms = st.number_input("Number of Bedrooms", min_value=0)
+    bathrooms = st.number_input("Number of Bathrooms", min_value=0)
+    asking_price = st.text_input("Asking Price ($)")
+    estimated_arv = st.text_input("Estimated ARV ($)")
+    condition = st.selectbox("Property Condition", ["Vacant", "Needs Repair", "Code Violations", "As-Is", "Other"])
+    notes = st.text_area("Additional Notes")
+
+    submitted = st.form_submit_button("📥 Submit Lead")
+
+    if submitted:
+        # Append to Google Sheet
+        sheet.append_row([name, phone, email, property_address, property_type, bedrooms, bathrooms, asking_price, estimated_arv, condition, notes])
+        st.success("✅ Lead successfully submitted to Agent Realty!")
+
+        # Optional: Display lead summary
+        st.write("### Submitted Lead")
+        st.write(f"**Name:** {name}")
+        st.write(f"**Phone:** {phone}")
+        st.write(f"**Email:** {email}")
+        st.write(f"**Address:** {property_address}")
+        st.write(f"**Asking Price:** {asking_price}")
+        st.write(f"**Estimated ARV:** {estimated_arv}")
+        st.write(f"**Condition:** {condition}")
+        st.write(f"**Notes:** {notes}")
