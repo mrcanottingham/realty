@@ -1,40 +1,38 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, getUserRole } from '@/lib/supabase/server';
 
 export async function signIn(email: string, password: string) {
   const supabase = await createClient();
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
+    if (error.message.toLowerCase().includes('email not confirmed')) {
+      return { error: 'Please confirm your email before logging in.' };
+    }
     return { error: error.message };
   }
 
-  redirect('/dashboard');
+  const role = await getUserRole(data.user.id);
+  redirect(role === 'caregiver' ? '/portal' : '/dashboard');
 }
 
-export async function signUp(
-  email: string,
-  password: string,
-  role: 'agency_owner' | 'caregiver'
-) {
+export async function signUp(email: string, password: string, fullName: string) {
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      data: { role },
+      data: { full_name: fullName },
     },
   });
 
-  if (error) {
-    return { error: error.message };
-  }
+  if (error) return { error: error.message };
 
-  redirect('/dashboard');
+  return { success: true };
 }
 
 export async function signOut() {

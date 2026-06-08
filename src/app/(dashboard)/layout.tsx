@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, getUserRole } from '@/lib/supabase/server';
 
 export default async function DashboardLayout({
   children,
@@ -7,18 +7,13 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user) {
-    redirect('/login');
-  }
+  if (!user) redirect('/login');
 
-  const role = user.user_metadata?.role as string | undefined;
-
+  const role = await getUserRole(user.id);
   if (role !== 'agency_owner') {
-    redirect(role === 'caregiver' ? '/caregiver/portal' : '/login');
+    redirect(role === 'caregiver' ? '/portal' : '/login');
   }
 
   return <>{children}</>;

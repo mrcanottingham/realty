@@ -20,3 +20,13 @@ export async function createClient() {
     },
   });
 }
+
+export async function getUserRole(userId: string): Promise<string | null> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', userId)
+    .single();
+  return data?.role ?? null;
+}

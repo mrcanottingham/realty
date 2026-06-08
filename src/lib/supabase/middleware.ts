@@ -11,9 +11,7 @@ export async function updateSession(request: NextRequest) {
         return request.cookies.getAll();
       },
       setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value }) =>
-          request.cookies.set(name, value)
-        );
+        cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
         supabaseResponse = NextResponse.next({ request });
         cookiesToSet.forEach(({ name, value, options }) =>
           supabaseResponse.cookies.set(name, value, options)
@@ -22,33 +20,35 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user } } = await supabase.auth.getUser();
 
   const pathname = request.nextUrl.pathname;
-
-  const isAuthRoute =
-    pathname.startsWith('/login') || pathname.startsWith('/signup');
+  const isAuthRoute = pathname.startsWith('/login') || pathname.startsWith('/signup');
   const isDashboardRoute = pathname.startsWith('/dashboard');
-  const isCaregiverRoute = pathname.startsWith('/caregiver');
+  const isPortalRoute = pathname.startsWith('/portal');
 
-  if (!user && (isDashboardRoute || isCaregiverRoute)) {
+  if (!user && (isDashboardRoute || isPortalRoute)) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     return NextResponse.redirect(url);
   }
 
   if (user) {
-    const role = user.user_metadata?.role as string | undefined;
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    const role = profile?.role as string | undefined;
 
     if (isDashboardRoute && role !== 'agency_owner') {
       const url = request.nextUrl.clone();
-      url.pathname = role === 'caregiver' ? '/caregiver/portal' : '/login';
+      url.pathname = role === 'caregiver' ? '/portal' : '/login';
       return NextResponse.redirect(url);
     }
 
-    if (isCaregiverRoute && role !== 'caregiver') {
+    if (isPortalRoute && role !== 'caregiver') {
       const url = request.nextUrl.clone();
       url.pathname = role === 'agency_owner' ? '/dashboard' : '/login';
       return NextResponse.redirect(url);
@@ -56,7 +56,7 @@ export async function updateSession(request: NextRequest) {
 
     if (isAuthRoute) {
       const url = request.nextUrl.clone();
-      url.pathname = role === 'caregiver' ? '/caregiver/portal' : '/dashboard';
+      url.pathname = role === 'caregiver' ? '/portal' : '/dashboard';
       return NextResponse.redirect(url);
     }
   }
