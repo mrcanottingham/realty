@@ -1,16 +1,43 @@
 -- Carely: Local Development Seed Data
 -- Run after migrations. Uses deterministic UUIDs for reproducibility.
 
--- ============================================================
--- NOTE: Seed data uses fixed UUIDs so re-running is idempotent.
--- The owner_id references a test user that must exist in auth.users.
--- In local Supabase dev, create the user via the dashboard or
--- supabase auth signup before running this seed.
--- Placeholder owner_id: 00000000-0000-0000-0000-000000000001
--- ============================================================
-
 -- Disable RLS for seeding (local dev only)
 SET session_replication_role = replica;
+
+-- ============================================================
+-- TEST USERS (auth.users)
+-- Creates a test agency owner so the foreign key on agencies.owner_id
+-- is satisfied without any manual steps.
+-- Login: owner@carely.test / password: carely-dev-2024
+-- ============================================================
+
+INSERT INTO auth.users (
+  id,
+  instance_id,
+  email,
+  encrypted_password,
+  email_confirmed_at,
+  raw_app_meta_data,
+  raw_user_meta_data,
+  created_at,
+  updated_at,
+  role,
+  aud
+)
+VALUES (
+  '00000000-0000-0000-0000-000000000001',
+  '00000000-0000-0000-0000-000000000000',
+  'owner@carely.test',
+  crypt('carely-dev-2024', gen_salt('bf')),
+  now(),
+  '{"provider": "email", "providers": ["email"]}',
+  '{"full_name": "Dev Owner"}',
+  now(),
+  now(),
+  'authenticated',
+  'authenticated'
+)
+ON CONFLICT (id) DO NOTHING;
 
 -- ============================================================
 -- AGENCY
