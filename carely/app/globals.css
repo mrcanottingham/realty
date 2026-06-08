@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f9fafb;
+  --foreground: #111827;
+
+  /* Status color tokens — single source of truth for all phases */
+  --status-not-started-bg: #f3f4f6;
+  --status-not-started-text: #4b5563;
+  --status-not-started-ring: #e5e7eb;
+
+  --status-in-progress-bg: #fffbeb;
+  --status-in-progress-text: #b45309;
+  --status-in-progress-ring: #fde68a;
+
+  --status-complete-bg: #ecfdf5;
+  --status-complete-text: #065f46;
+  --status-complete-ring: #a7f3d0;
+
+  --status-flagged-bg: #fff1f2;
+  --status-flagged-text: #be123c;
+  --status-flagged-ring: #fecdd3;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
